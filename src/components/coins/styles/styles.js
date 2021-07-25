@@ -1,7 +1,8 @@
 import {StyleSheet} from 'react-native';
 
 /*
-   flex: 1 hace que ocupe 1 fraccion del contenido actual,
+   flex: 1 hace que ocupe 1 fraccion del contenido actual y 
+   todo el ancho o largo dependiendo de la direccion del flex,
    por defecto el flex en react-native se direcciona como
    columna.
 */
