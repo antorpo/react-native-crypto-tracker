@@ -5,7 +5,6 @@ import {coinsScreen as styles} from './styles/styles';
 import {CoinsItem} from './CoinsItem';
 import Http from '../../libs/http';
 
-
 /*
   <Pressable> podriamos compararlo con un <a> de html,
   nos sirve para crear vinculos.
@@ -43,9 +42,10 @@ class CoinsScreen extends Component {
     }
   };
 
-  handlePress = () => {
+  handlePress = coin => {
     // navigate() recibe el nombre del Screen definido en el StackNavigator
-    this.props.navigation.navigate('CoinDetail');
+    // enviamos el coin que se inyecta en los props de CoinDetail como this.props.route.params
+    this.props.navigation.navigate('CoinDetail', { coin });
   };
 
   render() {
@@ -58,7 +58,9 @@ class CoinsScreen extends Component {
         ) : (
           <FlatList
             data={coins}
-            renderItem={({item}) => <CoinsItem item={item} />}
+            renderItem={({item}) => (
+              <CoinsItem item={item} onPress={() => this.handlePress(item)} />
+            )}
           />
         )}
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, Image} from 'react-native';
+import {View, Text, Image, Pressable} from 'react-native';
 import {coinsItem as styles} from './styles/styles';
 
 /*
@@ -9,7 +9,7 @@ import {coinsItem as styles} from './styles/styles';
 */
 
 // Funct-Component (Stateless)
-export const CoinsItem = ({item}) => {
+export const CoinsItem = ({item, onPress}) => {
   const colorPercent = item.percent_change_1h < 0 ? 'red' : 'green';
   const getImgArrow =
     item.percent_change_1h < 0
@@ -17,7 +17,7 @@ export const CoinsItem = ({item}) => {
       : require('../../assets/arrow_up.png');
 
   return (
-    <View style={styles().container}>
+    <Pressable style={styles().container} onPress={onPress}>
       <View style={styles().row}>
         <Text style={styles().symbolText}>{item.symbol}</Text>
         <Text style={styles().nameText}>{item.name}</Text>
@@ -28,8 +28,8 @@ export const CoinsItem = ({item}) => {
         <Text style={styles(colorPercent).percentText}>
           {item.percent_change_1h}
         </Text>
-        <Image source={getImgArrow} style={styles().imageIcon}/>
+        <Image source={getImgArrow} style={styles().imageIcon} />
       </View>
-    </View>
-  ); 
+    </Pressable>
+  );
 };
