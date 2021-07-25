@@ -9,22 +9,37 @@ import {StyleSheet} from 'react-native';
 export const coinsScreen = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'red',
-    alignItems: 'center'
+    backgroundColor: '#fff',
   },
   titleText: {
     color: '#fff',
-    textAlign: 'center'
+    textAlign: 'center',
   },
   btn: {
     padding: 8,
     backgroundColor: 'blue',
     borderRadius: 8,
     margin: 16,
-    alignSelf: 'stretch'
+    alignSelf: 'stretch',
   },
   btnText: {
     color: '#fff',
-    textAlign: 'center'
-  }
+    textAlign: 'center',
+  },
+  loader: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+  error: {
+    flex: 2,
+  },
+  errorText: {
+    textAlign: 'center',
+    fontSize: 25,
+    color: '#f72f2f',
+    borderBottomColor: '#f72f2f',
+    borderBottomWidth: 1,
+    marginRight: 80,
+    marginLeft: 80,
+  },
 });

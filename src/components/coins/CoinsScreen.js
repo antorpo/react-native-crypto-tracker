@@ -1,8 +1,10 @@
 /* eslint-disable prettier/prettier */
 import React, {Component} from 'react';
-import {View, Text, Pressable} from 'react-native';
+import {View, Text, FlatList, ActivityIndicator, Pressable} from 'react-native';
 import {coinsScreen as styles} from './styles/styles';
+import {CoinsItem} from './CoinsItem';
 import Http from '../../libs/http';
+
 /*
   <Pressable> podriamos compararlo con un <a> de html,
   nos sirve para crear vinculos.
@@ -12,18 +14,32 @@ import Http from '../../libs/http';
 class CoinsScreen extends Component {
   state = {
     coins: [],
+    loading: false,
+    error: null,
   };
 
   // Se llama justo depues de montar el componente
   componentDidMount = async () => {
-    const response = await Http.instance.get(
-      'https://api.coinlore.net/api/tickers/',
-    );
+    try {
+      this.setState({
+        loading: true,
+      });
 
-    this.setState({
-      ...this.state,
-      coins: response.data,
-    });
+      const response = await Http.instance.get(
+        'https://api.coinlore.net/api/tickers/',
+      );
+
+      this.setState({
+        ...this.state,
+        coins: response.data,
+        loading: false,
+      });
+    } catch (err) {
+      this.setState({
+        loading: false,
+        error: err,
+      });
+    }
   };
 
   handlePress = () => {
@@ -32,12 +48,24 @@ class CoinsScreen extends Component {
   };
 
   render() {
+    const {coins, loading, error} = this.state;
+
     return (
       <View style={styles.container}>
-        <Text style={styles.titleText}>Coins Screen</Text>
-        <Pressable style={styles.btn} onPress={this.handlePress}>
-          <Text style={styles.btnText}>Go to detail</Text>
-        </Pressable>
+        {loading ? (
+          <ActivityIndicator color="#fff" size="large" style={styles.loader} />
+        ) : (
+          <FlatList
+            data={coins}
+            renderItem={({item}) => <CoinsItem item={item} />}
+          />
+        )}
+
+        {error && (
+          <View style={styles.error}>
+            <Text style={styles.errorText}>Error fetching data!</Text>
+          </View>
+        )}
       </View>
     );
   }

@@ -2,7 +2,7 @@ class Http {
   // Singleton
   static instance = new Http();
 
-  get = async (url) => {
+  get = async url => {
     try {
       let request = await fetch(url);
       let json = await request.json();
