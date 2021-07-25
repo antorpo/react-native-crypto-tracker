@@ -5,6 +5,7 @@ import {coinsScreen as styles} from './styles/styles';
 import {CoinsItem} from './CoinsItem';
 import Http from '../../libs/http';
 
+
 /*
   <Pressable> podriamos compararlo con un <a> de html,
   nos sirve para crear vinculos.
