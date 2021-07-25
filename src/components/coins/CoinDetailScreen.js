@@ -3,14 +3,14 @@ import React, {Component} from 'react';
 import {View, Text} from 'react-native';
 
 // Class-Component (Stateful)
-class CoinsScreen extends Component {
+class CoinDetailScreen extends Component {
   render() {
     return (
       <View>
-        <Text>Coins Screen</Text>
+        <Text>CoinDetailScreen Funcionando</Text>
       </View>
     );
   }
 }
 
-export default CoinsScreen;
+export default CoinDetailScreen;
