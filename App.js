@@ -1,12 +1,16 @@
 import React from 'react';
-import {View, Text} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
+import {CoinsStack} from './src/components/CoinsStack';
 
 /*
   NavigationContainer: Posee el estado de la navegacion dentro de la app.
 */
 const App = () => {
-  return <NavigationContainer></NavigationContainer>;
+  return (
+    <NavigationContainer>
+      <CoinsStack />
+    </NavigationContainer>
+  );
 };
 
 export default App;
