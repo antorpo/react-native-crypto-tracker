@@ -60,7 +60,8 @@ export const coinsItem = (color = 'green') =>
       padding: 16,
       justifyContent: 'space-between',
       borderBottomColor: '#e0e0e0',
-      borderBottomWidth: 0.5,
+      borderBottomWidth: 1,
+      paddingLeft: Platform.OS == 'ios' ? 0 : 16,
       marginLeft: Platform.OS == 'ios' ? 16 : 0,
     },
     row: {
@@ -91,3 +92,25 @@ export const coinsItem = (color = 'green') =>
       height: 22,
     },
   });
+
+export const coinDetailScreen = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#272c35',
+  },
+  iconImage: {
+    width: 25,
+    height: 25,
+  },
+  subHeader: {
+    backgroundColor: 'rgba(0, 0, 0, 0.1)',
+    padding: 16,
+    flexDirection: 'row',
+  },
+  titleText: {
+    fontSize: 20,
+    color: '#fff',
+    fontWeight: 'bold',
+    marginLeft: 8,
+  },
+});
