@@ -113,4 +113,20 @@ export const coinDetailScreen = StyleSheet.create({
     fontWeight: 'bold',
     marginLeft: 8,
   },
+  sectionHeader: {
+    backgroundColor: 'rgba(0,0,0, 0.3)',
+    padding: 8,
+  },
+  sectionItem: {
+    padding: 8,
+  },
+  itemText: {
+    color: '#fff',
+    fontSize: 14,
+  },
+  sectionText: {
+    color: '#fff',
+    fontSize: 14,
+    fontWeight: 'bold',
+  },
 });
