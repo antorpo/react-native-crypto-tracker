@@ -1,12 +1,15 @@
 /* eslint-disable prettier/prettier */
 import React, {Component} from 'react';
-import {View, Image, Text, SectionList} from 'react-native';
+import {View, Image, Text, SectionList, FlatList} from 'react-native';
+import {CoinMarketItem} from './CoinMarketItem';
 import {coinDetailScreen as styles} from './styles/styles';
+import Http from '../../libs/http';
 
 // Class-Component (Stateful)
 class CoinDetailScreen extends Component {
   state = {
     coin: {},
+    markets: [],
   };
 
   componentDidMount() {
@@ -16,10 +19,20 @@ class CoinDetailScreen extends Component {
     // Cambiamos el titulo en el Navigator
     this.props.navigation.setOptions({title: coin.symbol});
 
+    this.getMarkets(coin.id);
+
     this.setState({
       coin,
     });
   }
+
+  getMarkets = async coinId => {
+    const url = `https://api.coinlore.net/api/coin/markets/?id=${coinId}`;
+    const markets = await Http.instance.get(url);
+    this.setState({
+      markets,
+    });
+  };
 
   /*
     Usar imagenes remotas: 
@@ -53,7 +66,7 @@ class CoinDetailScreen extends Component {
   };
 
   render() {
-    const {coin} = this.state;
+    const {coin, markets} = this.state;
 
     return (
       <View style={styles.container}>
@@ -66,8 +79,9 @@ class CoinDetailScreen extends Component {
         </View>
 
         <SectionList
+          style={styles.section}
           sections={this.getSections(coin)}
-          keyExtractor={(item) => item}
+          keyExtractor={item => item}
           renderItem={({item}) => (
             <View style={styles.sectionItem}>
               <Text style={styles.itemText}>{item}</Text>
@@ -78,6 +92,15 @@ class CoinDetailScreen extends Component {
               <Text style={styles.sectionText}>{section.title}</Text>
             </View>
           )}
+        />
+
+        <Text style={styles.marketTitle}>Markets</Text>
+        <FlatList
+          style={styles.list}
+          horizontal={true}
+          data={markets}
+          renderItem={({item}) => <CoinMarketItem item={item} />}
+          keyExtractor={({item, index}) => index}
         />
       </View>
     );
